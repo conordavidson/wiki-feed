@@ -17,10 +17,10 @@ class Contributors extends Component {
     })
 
     return(
-      <div id="topcontributors" className="panel">
-        <div className="panel-title">Top Contributors</div>
-          {topContributorComponents}
-      </div>
+        <div id="topcontributors" className="half">
+          <div className="panel-subtitle">Top Contributors</div>
+            {topContributorComponents}
+        </div>
     )
   }
 }

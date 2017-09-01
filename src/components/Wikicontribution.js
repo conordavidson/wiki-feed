@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 
 class Wikicontribution extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      id: this.props.id,
-      title: this.props.title,
-      type: this.props.type,
-      user: this.props.user
-    }
-  }
   render(){
     return(
-      <p>
-        <span>{this.state.title}</span>
-      </p>
+      <div className="contribution">
+        <div className="contribution-language">{this.props.language}</div>
+        <div className="contribution-user">{this.props.user}</div>
+        <div className="contribution-article-title">{this.props.title}</div>
+      </div>
     )
   }
 }

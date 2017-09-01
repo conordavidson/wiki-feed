@@ -7,8 +7,8 @@ class Chart extends Component {
 
     let graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph'),
-      width: 600,
-      height: 400,
+      width: document.getElementById('graph').offsetWidth,
+      height: 450,
       renderer: 'area',
       stroke: true,
     	series: new Rickshaw.Series.FixedDuration([{ name: 'English' }], undefined, {
@@ -18,14 +18,14 @@ class Chart extends Component {
     	})
     });
 
-    graph.renderer.unstack = true;
+    window.onresize = () => {
+      graph.configure({
+        width: document.getElementById('graph').offsetWidth,
+      })
+      graph.render();
+    };
 
-    let hoverDetail = new Rickshaw.Graph.HoverDetail( {
-      	graph: graph,
-      	xFormatter: function(x) {
-      		return new Date(x * 1000).toString();
-      	}
-    });
+    graph.renderer.unstack = true;
 
     var legend = new Rickshaw.Graph.Legend( {
 	      graph: graph,
@@ -57,7 +57,10 @@ class Chart extends Component {
   render(){
     return(
       <div id="chart" className="panel">
-        <div id="legend" />
+        <div className="legend-container">
+          <div className="panel-subtitle">Legend</div>
+          <div id="legend"></div>
+        </div>
         <div id="graph" />
       </div>
     )

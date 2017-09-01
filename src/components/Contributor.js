@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 class Contributor extends Component {
   render(){
     return(
-      <div>
-        <span>{this.props.language}:</span><span>{this.props.contributions}</span>
+      <div className="contributor">
+        <div className="contributor-language">{this.props.language}</div>
+        <div className="contributor-contributions">{this.props.contributions}</div>
       </div>
     )
   }
