@@ -1,7 +1,7 @@
 # Wiki-Feed
 Visualizes Wikipedia's recent changes Real-Time API
 
-<!-- **Link to project:** http://recruiters-love-seeing-live-demos.com/ -->
+**Link to project:** https://wiki-feed.herokuapp.com/
 
 ## How It's Made:
 

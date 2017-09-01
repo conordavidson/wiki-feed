@@ -25,8 +25,6 @@ class Chart extends Component {
       graph.render();
     };
 
-    graph.renderer.unstack = true;
-
     var legend = new Rickshaw.Graph.Legend( {
 	      graph: graph,
 	      element: document.getElementById('legend')

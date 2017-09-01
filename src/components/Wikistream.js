@@ -71,7 +71,7 @@ class Wikistream extends Component {
     this.setState({
       contributionsPerSecond: contributionsPerSecond,
       totalContributions: totalContributions,
-      contributions: [contribution].concat(this.state.contributions.slice(0, 9)),
+      contributions: [contribution].concat(this.state.contributions.slice(0, 4)),
       allContributions: allContributions
     })
   }
