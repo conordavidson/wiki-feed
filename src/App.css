@@ -1,0 +1,21 @@
+*{
+  box-sizing: border-box;
+}
+
+html, body{
+  background-color: #fafafa;
+}
+
+.swatch{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+#legend, #graph{
+  display: inline-block;
+}
+
+g path{
+  opacity: 0.5;
+}

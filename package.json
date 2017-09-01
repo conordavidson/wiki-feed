@@ -1,0 +1,19 @@
+{
+  "name": "wiki-feed",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jQuery": "^1.7.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.12",
+    "rickshaw": "^1.6.2",
+    "uuid": "^3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
