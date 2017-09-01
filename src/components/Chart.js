@@ -18,6 +18,8 @@ class Chart extends Component {
     	})
     });
 
+    graph.renderer.unstack = true;
+
     window.onresize = () => {
       graph.configure({
         width: document.getElementById('graph').offsetWidth,
@@ -30,26 +32,22 @@ class Chart extends Component {
 	      element: document.getElementById('legend')
     });
 
-    this.interval = setInterval(() => this.graphData(graph, legend), 1000);
-  }
-
-  graphData(graph, legend){
-
-    let data = {};
-
-    for(let k in this.props) {
-      if(this.props.hasOwnProperty(k)) {
-        if(k !== 'refreshCounts'){
-          data[k] = this.props[k]
+    let graphData = () => {
+      let data = {};
+      for(let k in this.props) {
+        if(this.props.hasOwnProperty(k)) {
+          if(k !== 'refreshCounts'){
+            data[k] = this.props[k]
+          }
         }
       }
+      graph.series.addData(data);
+      graph.render();
+      legend.render();
+      this.props.refreshCounts();
     }
 
-  	graph.series.addData(data);
-  	graph.render();
-    legend.render();
-
-    this.props.refreshCounts();
+    setInterval(() => graphData(), 1000);
   }
 
   render(){
