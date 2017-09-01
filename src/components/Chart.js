@@ -11,7 +11,7 @@ class Chart extends Component {
       height: 400,
       renderer: 'area',
       stroke: true,
-    	series: new Rickshaw.Series.FixedDuration([{ name: 'enwiki' }], undefined, {
+    	series: new Rickshaw.Series.FixedDuration([{ name: 'English' }], undefined, {
     		timeInterval: 250,
     		maxDataPoints: 25,
     		timeBase: new Date().getTime() / 100
@@ -56,7 +56,7 @@ class Chart extends Component {
 
   render(){
     return(
-      <div>
+      <div id="chart" className="panel">
         <div id="legend" />
         <div id="graph" />
       </div>

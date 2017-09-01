@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Wikievent extends Component {
+class Wikicontribution extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -19,4 +19,4 @@ class Wikievent extends Component {
   }
 }
 
-export default Wikievent;
+export default Wikicontribution;

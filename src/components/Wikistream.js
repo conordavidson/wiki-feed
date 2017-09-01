@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import Wikievent from './Wikievent';
+import Wikicontribution from './Wikicontribution';
+import Contributors from './Contributors'
 import Chart from './Chart';
 import uuidv4 from 'uuid/v4';
+import Wikilanguages from '../data/wikilanguages.json';
 
 class Wikistream extends Component {
   constructor(props){
     super(props);
     this.state = {
       streamConnected: false,
-      events: [],
-      counts: {}
+      contributions: [],
+      contributionsPerSecond: {},
+      totalContributions: {}
     }
     this.initializeStream = this.initializeStream.bind(this);
-    this.newEvent = this.newEvent.bind(this);
+    this.newContribution = this.newContribution.bind(this);
     this.updateCounts = this.updateCounts.bind(this);
   }
 
@@ -28,61 +31,77 @@ class Wikistream extends Component {
       })
     };
     stream.onmessage = msg => {
-      this.newEvent(JSON.parse(msg.data));
+      this.newContribution(JSON.parse(msg.data));
     };
   }
 
-  newEvent(event){
-    if (this.filterEvent(event)){
-      this.updateCounts(event);
-      this.setState({
-        events: [event].concat(this.state.events.slice(0,9))
-      })
+  newContribution(contribution){
+    if (this.filterContribution(contribution)){
+      let updatedContribution = this.attachLanguage(contribution);
+      if(updatedContribution){
+        this.updateCounts(updatedContribution);
+      }
     }
   }
 
-  filterEvent(event){
-    return (event.bot === false &&
-           (event.type === "edit" || event.type === "new"))
+  filterContribution(contribution){
+    return (contribution.bot === false &&
+           (contribution.type === "edit" || contribution.type === "new"))
   }
 
-  updateCounts(event){
-    let updatedCount = this.state.counts[event.wiki] === undefined ? 1 : this.state.counts[event.wiki] + 1
-    let counts = Object.assign({}, this.state.counts, {
-      [event.wiki]: updatedCount
-    });
+  attachLanguage(contribution){
+    let language = contribution.wiki.split("wik")[0]
+    if (Wikilanguages[language]){
+      contribution.language = Wikilanguages[language]
+      return contribution;
+    }
+    return false;
+  }
+
+  updateCounts(contribution){
+    let updatedContributionsPerSecond = this.state.contributionsPerSecond[contribution.language] === undefined ? 1 : this.state.contributionsPerSecond[contribution.language] + 1
+    let updatedTotalContributions = this.state.totalContributions[contribution.language] === undefined ? 1 : this.state.totalContributions[contribution.language] + 1
+
+    let contributionsPerSecond = Object.assign({}, this.state.contributionsPerSecond, {[contribution.language]: updatedContributionsPerSecond});
+    let totalContributions = Object.assign({}, this.state.totalContributions, {[contribution.language]: updatedTotalContributions});
+
     this.setState({
-      counts: counts
+      contributionsPerSecond: contributionsPerSecond,
+      totalContributions: totalContributions,
+      contributions: [contribution].concat(this.state.contributions.slice(0,9))
     })
   }
 
   refreshCounts(){
     this.setState({
-      counts: {}
+      contributionsPerSecond: {}
     })
   }
 
   render(){
-    let eventComponents = null;
+    let contributionComponents = null;
 
-    if(this.state.events != null){
-        eventComponents = this.state.events.map(event => {
-            return ( <Wikievent
+    if(this.state.contributions != null){
+        contributionComponents = this.state.contributions.map(contribution => {
+            return ( <Wikicontribution
                          key={uuidv4()}
-                         id={event.id}
-                         title={event.title}
-                         type={event.type}
-                         user={event.user}
+                         id={contribution.id}
+                         title={contribution.title}
+                         type={contribution.type}
+                         user={contribution.user}
                      /> );
       });
     }
     return (
-      <div>
-        <div id="chart">
-          <Chart {...this.state.counts} refreshCounts={this.refreshCounts.bind(this)}/>
+      <div className="container">
+        <div className="left">
+          <Contributors {...this.state.totalContributions} />
+          <div id="stream" className="panel">
+            {contributionComponents}
+          </div>
         </div>
-        <div id="stream">
-          {eventComponents}
+        <div className="right">
+          <Chart {...this.state.contributionsPerSecond} refreshCounts={this.refreshCounts.bind(this)} />
         </div>
       </div>
     )
