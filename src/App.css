@@ -1,6 +1,7 @@
 *{
   box-sizing: border-box;
   font-family: 'Roboto Mono';
+  -webkit-font-smoothing: antialiased;
 }
 
 ul, li{
@@ -97,7 +98,7 @@ main{
 
 .half:first-child{
   float: left;
-  border-right: 1px solid grey;
+  border-right: 1px solid #cacaca;
   padding-right: 20px;
 }
 
@@ -154,6 +155,7 @@ main{
   text-align: center;
   line-height: 80px;
   font-size: 48px;
+  font-weight: 100;
 }
 
 .contribution{
@@ -181,7 +183,6 @@ main{
   font-size: 14px;
   clear: both;
   padding-top: 12px;
-  font-style: italic;
 }
 
 #graph{
@@ -236,7 +237,6 @@ main{
 #legend .label{
   vertical-align: middle;
   font-size: 12px;
-  font-weight: 700;
   text-transform: uppercase;
 }
 
