@@ -162,7 +162,7 @@ main{
 .contribution{
   border-left: 5px solid #f8f9fa;
   padding: 10px;
-  box-shadow: 0 2px 1px rgba(0,0,0,0.16), 0 2px 1px rgba(0,0,0,0.23);
+  box-shadow: 0 2px 2px rgba(102,119,136,0.1), 0 1px 2px rgba(102,119,136,0.3);
   margin-bottom: 8px;
 }
 
