@@ -10,6 +10,8 @@ class Chart extends Component {
       width: document.getElementById('graph').offsetWidth,
       height: 450,
       renderer: 'area',
+      interpolation: 'basis',
+      unstack: 'true',
       stroke: true,
     	series: new Rickshaw.Series.FixedDuration([{ name: 'English' }], undefined, {
     		timeInterval: 250,
@@ -24,7 +26,7 @@ class Chart extends Component {
       graph.configure({
         width: document.getElementById('graph').offsetWidth,
       })
-      graph.render();
+      graph.update();
     };
 
     var legend = new Rickshaw.Graph.Legend( {
@@ -42,7 +44,7 @@ class Chart extends Component {
         }
       }
       graph.series.addData(data);
-      graph.render();
+      graph.update();
       legend.render();
       this.props.refreshCounts();
     }
