@@ -54,9 +54,9 @@ class Chart extends Component {
 
   render(){
     return(
-      <div id="chart" className="panel">
+      <div className="right panel">
+        <div className="legend-title panel-subtitle">Legend</div>
         <div className="legend-container">
-          <div className="panel-subtitle">Legend</div>
           <div id="legend"></div>
         </div>
         <div id="graph" />

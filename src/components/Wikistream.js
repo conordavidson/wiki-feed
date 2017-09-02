@@ -108,9 +108,7 @@ class Wikistream extends Component {
             {contributionComponents}
           </div>
         </div>
-        <div className="right">
-          <Chart {...this.state.contributionsPerSecond} refreshCounts={this.refreshCounts.bind(this)} />
-        </div>
+        <Chart {...this.state.contributionsPerSecond} refreshCounts={this.refreshCounts.bind(this)} />
       </div>
     )
   }
