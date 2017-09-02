@@ -8,7 +8,7 @@ class App extends Component {
       <div id="app">
         <header>
           <div className="container">
-            <div className="project-info project-title">WikiFeed</div>
+            <div className="project-info project-title">Wiki<span className='secondary'>Feed</span></div>
             <div className="project-info project-author">Conor Davidson</div>
           </div>
         </header>
