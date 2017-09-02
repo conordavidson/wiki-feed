@@ -5,6 +5,8 @@ class Chart extends Component {
 
   componentDidMount(){
 
+    let pallete = new Rickshaw.Color.Palette({scheme: "classic9"});
+
     let graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph'),
       width: document.getElementById('graph').offsetWidth,
@@ -13,20 +15,18 @@ class Chart extends Component {
       interpolation: 'basis',
       unstack: 'true',
       stroke: true,
-    	series: new Rickshaw.Series.FixedDuration([{ name: 'English' }], undefined, {
+    	series: new Rickshaw.Series.FixedDuration([{ name: 'English' }], pallete, {
     		timeInterval: 250,
     		maxDataPoints: 25,
     		timeBase: new Date().getTime() / 100
     	})
     });
 
-    graph.renderer.unstack = true;
-
     window.onresize = () => {
       graph.configure({
         width: document.getElementById('graph').offsetWidth,
       })
-      graph.update();
+      graph.render();
     };
 
     var legend = new Rickshaw.Graph.Legend( {
@@ -35,7 +35,7 @@ class Chart extends Component {
     });
 
     let graphData = () => {
-      let data = {};
+      let data = [];
       for(let k in this.props) {
         if(this.props.hasOwnProperty(k)) {
           if(k !== 'refreshCounts'){
@@ -44,7 +44,7 @@ class Chart extends Component {
         }
       }
       graph.series.addData(data);
-      graph.update();
+      graph.render();
       legend.render();
       this.props.refreshCounts();
     }

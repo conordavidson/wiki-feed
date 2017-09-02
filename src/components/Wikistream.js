@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
+
 import Wikicontribution from './Wikicontribution';
 import Contributors from './Contributors'
 import Allcontributions from './Allcontributions'
 import Chart from './Chart';
-import uuidv4 from 'uuid/v4';
 import Wikilanguages from '../data/wikilanguages.json';
 
 class Wikistream extends Component {

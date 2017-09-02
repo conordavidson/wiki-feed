@@ -136,6 +136,12 @@ main{
   text-transform: uppercase;
 }
 
+.contributor-index{
+  font-size: 12px;
+  color: #909090;
+  margin-right: 4px;
+}
+
 .contributor-contributions{
   float: right;
   color: #1541e0;
